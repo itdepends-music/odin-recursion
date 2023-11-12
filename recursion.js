@@ -17,4 +17,24 @@ const fibsRec = (n) => {
     return prev.concat(prev[prev.length - 1] + prev[prev.length - 2]);
 };
 
-console.log(fibsRec(8));
+const mergeSort = (arr) => {
+    if (arr.length <= 1) return arr;
+    else {
+        const splitPoint = Math.floor(arr.length / 2);
+        const firstHalf = mergeSort(arr.slice(0, splitPoint));
+        const secondHalf = mergeSort(arr.slice(splitPoint));
+
+        const sorted = [];
+        let i = 0,
+            j = 0;
+        while (i < firstHalf.length || j < secondHalf.length) {
+            if (j >= secondHalf.length || firstHalf[i] < secondHalf[j]) {
+                sorted.push(firstHalf[i++]);
+            } else {
+                sorted.push(secondHalf[j++]);
+            }
+        }
+
+        return sorted;
+    }
+};
